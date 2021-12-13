@@ -2,15 +2,62 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { COMPONENT_MAP } from './component-registry';
+import { CardAComponent } from './cards/card-a.component';
+import { CardBComponent } from './cards/card-b.component';
+import { CardCComponent } from './cards/card-c.component';
+import { PortalModule } from '@angular/cdk/portal';
+
+// define the mapping of string id's to components
+const componentMap = [
+  {
+    id: 'card-a', // this ID is matched against the FAKE_SERVER_DATA to retrieve the right component
+    component: CardAComponent
+  },
+  {
+    id: 'card-b',
+    component: CardBComponent
+  },
+  {
+    id: 'card-c',
+    component: CardCComponent
+  }
+]
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CardAComponent,
+    CardBComponent,
+    CardCComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule,
+    PortalModule,
   ],
-  providers: [],
+  providers: [
+    {provide: COMPONENT_MAP, useValue: componentMap}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
